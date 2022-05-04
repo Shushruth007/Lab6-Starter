@@ -12,7 +12,7 @@ import edu.ucsd.cse110.lab6.misc.Constants;
 @SuppressWarnings("unused")
 public class Exercises {
     public static double mean(List<Integer> numbers) {
-        int sum = 0;
+        double sum = 0;
         for (int number : numbers) {
             sum += number;
         }
@@ -22,13 +22,13 @@ public class Exercises {
     public static double standardDeviation(List<Integer> numbers) {
         double mean = mean(numbers);
 
-        int deviationSum = 0;
+        double deviationSum = 0;
         for (int number : numbers) {
             deviationSum += Math.pow(mean - number, 2);
         }
 
         int length = numbers.size();
-        float variance = deviationSum / length;
+        double variance = deviationSum / length;
         return Math.sqrt(variance);
     }
 
@@ -42,6 +42,16 @@ public class Exercises {
         Stream<String> wordStream = re.splitAsStream(input);
         Set<String> excludedWords = Constants.excludedWords;
 
-        return 0;
+        List <Integer> filtered =  wordStream.map(String::toLowerCase)
+                .filter(word -> !excludedWords.contains(word))
+                .map(String::length).collect(Collectors.toList());
+
+        int count = 0;
+        for (int i : filtered){
+            if (i == 6){
+                count += 1;
+            }
+        }
+        return count;
     }
 }
