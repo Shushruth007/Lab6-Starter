@@ -44,14 +44,10 @@ public class Exercises {
 
         List <Integer> filtered =  wordStream.map(String::toLowerCase)
                 .filter(word -> !excludedWords.contains(word))
-                .map(String::length).collect(Collectors.toList());
+                .map(String::length)
+                .filter(size -> (size == 6)).collect(Collectors.toList());
 
-        int count = 0;
-        for (int i : filtered){
-            if (i == 6){
-                count += 1;
-            }
-        }
-        return count;
+
+        return filtered.size();
     }
 }
